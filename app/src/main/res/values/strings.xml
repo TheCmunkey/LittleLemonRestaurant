@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LittleLemonRestaurant</string>
+    <string name="logo">Little Lemon Restaurant</string>
+    <string name="enter_first_name">First Name</string>
+    <string name="enter_last_name">Last Name</string>
+    <string name="enter_email">Email</string>
+    <string name="register_button">Register</string>
+    <string name="welcome">Lets get started !\n\nPlease fill out the form below </string>
+</resources>
