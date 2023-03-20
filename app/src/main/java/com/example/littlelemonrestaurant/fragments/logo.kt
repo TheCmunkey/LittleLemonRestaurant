@@ -18,7 +18,7 @@ fun Logo() {
         contentDescription = stringResource(id = R.string.logo),
         ///contentScale = ContentScale.Inside,
         modifier = Modifier
-            .fillMaxWidth( 0.5f)
+            .fillMaxWidth( 0.4f)
             .background(Color.Transparent)
     )
 }

@@ -9,10 +9,11 @@ fun isUserLoggedIn()  : Boolean {
         MainActivity.mainActivity.getSharedPreferences("LittleLemon", ComponentActivity.MODE_PRIVATE)
     }
 
-    return false // sharedPreferences.getBoolean("loggedIn", false)
+    return sharedPreferences.getBoolean("loggedIn", false)
 }
 
 fun getFirstScreen() : String {
+
 
     return when (isUserLoggedIn()) {
         true ->  (HomeScreen.route)

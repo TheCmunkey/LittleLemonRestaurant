@@ -39,10 +39,12 @@ import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.littlelemonrestaurant.fragments.HomeScreen
+import com.example.littlelemonrestaurant.fragments.ProfileScreen
 import com.example.littlelemonrestaurant.fragments.Logo
 import com.example.littlelemonrestaurant.ui.theme.LittleLemonColor
 import com.example.littlelemonrestaurant.ui.theme.LittleLemonRestaurantTheme
+import com.example.littlelemonrestaurant.ui.theme.get_textFieldColors
+
 
 @Composable
 fun OnBoardingScreen(navController: NavHostController)
@@ -57,12 +59,7 @@ fun OnBoardingScreen(navController: NavHostController)
     var emailError: Boolean
     var buttonColor: Color
     val configuration = LocalConfiguration.current
-    val textFieldColors = TextFieldDefaults.outlinedTextFieldColors(
-              focusedBorderColor   = LittleLemonColor.Yellow,
-              unfocusedBorderColor = Color.DarkGray,
-              backgroundColor      = Color.LightGray,
-              focusedLabelColor    = LittleLemonColor.DarkGray,
-              errorLabelColor      = LittleLemonColor.DarkRed)
+
 
     val mainActivity = MainActivity.mainActivity
     val sharedPreferences by lazy {
@@ -162,7 +159,7 @@ fun OnBoardingScreen(navController: NavHostController)
                         shadow = Shadow(
                             color = Color.Black, offset = Offset(-1.0f,-1.0f), blurRadius = 0.5f
                         )),
-                    modifier = Modifier . padding (horizontal = 32.dp, vertical = 64.dp )
+                    modifier = Modifier.padding (horizontal = 32.dp, vertical = 32.dp )
                 )
             }
 
@@ -185,10 +182,9 @@ fun OnBoardingScreen(navController: NavHostController)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp),
-                textStyle = TextStyle(
-                    fontSize = 24.sp),
-                colors = textFieldColors,
+                    .padding(horizontal = 16.dp, vertical = 0.dp),
+                textStyle = TextStyle(fontSize = 24.sp),
+                colors = get_textFieldColors(),
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(
                         imeAction = ImeAction.Next,
@@ -222,10 +218,9 @@ fun OnBoardingScreen(navController: NavHostController)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp),
-                textStyle = TextStyle(
-                    fontSize = 24.sp),
-                colors = textFieldColors,
+                    .padding(horizontal = 16.dp, vertical = 0.dp),
+                textStyle = TextStyle(fontSize = 24.sp),
+                colors = get_textFieldColors(),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Next,
@@ -259,10 +254,9 @@ fun OnBoardingScreen(navController: NavHostController)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp),
-                textStyle = TextStyle(
-                    fontSize = 24.sp),
-                colors = textFieldColors,
+                    .padding(horizontal = 16.dp, vertical = 0.dp),
+                textStyle = TextStyle(fontSize = 24.sp),
+                colors = get_textFieldColors(),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Next,
@@ -278,7 +272,7 @@ fun OnBoardingScreen(navController: NavHostController)
                 })
 
 //REGISTER
-            Spacer(modifier = Modifier.height(18.dp))
+            Spacer(modifier = Modifier.height(28.dp))
 
             buttonColor = if (registerEnabled) LittleLemonColor.Yellow
             else Color.DarkGray
@@ -290,7 +284,7 @@ fun OnBoardingScreen(navController: NavHostController)
                           sharedPreferences.edit(commit = true) {
                               putBoolean("loggedIn", true)
                           }
-                          navController.navigate(HomeScreen.route)
+                          navController.navigate(ProfileScreen.route)
                       }
                     else
                       {
@@ -309,7 +303,7 @@ fun OnBoardingScreen(navController: NavHostController)
                     focusedElevation = 4.dp
                 ),
                 modifier = Modifier
-                    .padding(start = 16.dp, end = 16.dp)
+                    .padding(start = 16.dp, end = 16.dp,bottom = 16.dp)
                     .fillMaxWidth()
             )
             {

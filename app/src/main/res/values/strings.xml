@@ -1,9 +1,16 @@
 <resources>
-    <string name="app_name">LittleLemonRestaurant</string>
+    <string name="app_name">Little Lemon Restaurant</string>
     <string name="logo">Little Lemon Restaurant</string>
     <string name="enter_first_name">First Name</string>
     <string name="enter_last_name">Last Name</string>
     <string name="enter_email">Email</string>
     <string name="register_button">Register</string>
-    <string name="welcome">Lets get started !\n\nPlease fill out the form below </string>
+    <string name="log_out">Delete profile and log out</string>
+    <string name="welcome">Lets get started !\n\nPlease fill out the form below.\n\nThen click "register".</string>
+    <string name="your_profile">Your Profile</string>
+    <string name="little_lemon">Little Lemon</string>
+    <string name="location">"Chicago"</string>
+    <string name="description">We are a family-owned Mediterranean restaurant, focused on traditional recipes served with a modern twist</string>
+    <string name="order_delivery">Order Delivery</string>
+
 </resources>
