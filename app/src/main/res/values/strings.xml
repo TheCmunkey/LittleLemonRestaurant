@@ -8,7 +8,7 @@
     <string name="log_out">Delete profile and log out</string>
     <string name="welcome">Lets get started !\n\nPlease fill out the form below.\n\nThen click "register".</string>
     <string name="your_profile">Your Profile</string>
-    <string name="little_lemon">Little Lemon</string>
+    <string name="little_lemon">&#9753;Little Lemon</string>
     <string name="location">"Chicago"</string>
     <string name="description">We are a family-owned Mediterranean restaurant, focused on traditional recipes served with a modern twist</string>
     <string name="order_delivery">Order Delivery</string>

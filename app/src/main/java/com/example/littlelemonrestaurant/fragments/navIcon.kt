@@ -37,9 +37,9 @@ fun AdvancedIcon(
             Icon(
                 painter = painterResource(icon_id),
                 contentDescription = null,
-                //tint = Color.Unspecified,
+                 tint = Color.DarkGray,
                 // tint  = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
-                modifier = Modifier.size(64.dp)
+                modifier = Modifier.size(48.dp)
                     .clickable {
                         if(text=="Home") navController.navigate(HomeScreen.route)
                         else  navController.navigate(ProfileScreen.route)
@@ -53,11 +53,11 @@ fun AdvancedIcon(
 
             Spacer(modifier = Modifier.width(width = 6.dp))
 
-            Text(
-                text = text,
-                color = textColor,
-                fontSize = 20.sp
-            )
+//            Text(
+//                text = text,
+//                color = textColor,
+//                fontSize = 20.sp
+//            )
 
         }
 

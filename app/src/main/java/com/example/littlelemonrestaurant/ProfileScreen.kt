@@ -93,7 +93,7 @@ fun ProfileScreen(navController: NavHostController)
                 Logo()
                 Spacer(Modifier.weight(1f))
                 AdvancedIcon(
-                    icon_id = R.drawable.ic_little_lemon,
+                    icon_id = R.drawable.baseline_home_24,
                     text = "Home",
                     navController = navController
                 )
@@ -145,10 +145,10 @@ fun ProfileScreen(navController: NavHostController)
 
             Button(
                 onClick = {
-                    sharedPreferences.edit().remove("firstName").apply();
-                    sharedPreferences.edit().remove("lastName").apply();
-                    sharedPreferences.edit().remove("email").apply();
-                    sharedPreferences.edit().remove("loggedIn").apply();
+                    sharedPreferences.edit().remove("firstName").apply()
+                    sharedPreferences.edit().remove("lastName").apply()
+                    sharedPreferences.edit().remove("email").apply()
+                    sharedPreferences.edit().remove("loggedIn").apply()
 
                     navController.navigate(com.example.littlelemonrestaurant.fragments.OnBoardingScreen.route)
                 },

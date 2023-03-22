@@ -1,29 +1,25 @@
 package com.example.littlelemonrestaurant
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavHostController
-
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import com.example.littlelemonrestaurant.fragments.*
-
 import com.example.littlelemonrestaurant.ui.theme.LittleLemonRestaurantTheme
+import com.google.gson.GsonBuilder
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
@@ -34,14 +30,17 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
+
+
 class MainActivity : ComponentActivity() {
 
     private val menuItemListLiveData = MutableLiveData<MenuNetwork>()
-    private lateinit var items: List<MenuItemRoom>
 
     private val httpClient = HttpClient(Android) {
         install(ContentNegotiation) {
-            json(contentType = ContentType("text", "plain"))
+            json(contentType = ContentType("application", "json"))
+
         }
     }
     val database by lazy {
@@ -52,8 +51,11 @@ class MainActivity : ComponentActivity() {
     {
         super.onCreate(savedInstanceState)
 
+        savedLiveTrigger.postValue(false)
+
         mainActivity = this
 
+        //this.deleteDatabase("database");
         val startDestination = getFirstScreen()
 
         setContent {
@@ -61,6 +63,7 @@ class MainActivity : ComponentActivity() {
 
                  Box(modifier = Modifier.fillMaxSize())
                  {
+
                      val navController = rememberNavController()
 
                      NavHost(navController = navController, startDestination = startDestination)
@@ -95,7 +98,7 @@ class MainActivity : ComponentActivity() {
                 runOnUiThread {
                     menuItemListLiveData.value = menu
 
-            //  menu.menu.forEach { println("The element is ${it.title}") }
+
 
                 }
             }
@@ -105,15 +108,17 @@ class MainActivity : ComponentActivity() {
 
     companion object {
         lateinit var mainActivity : MainActivity
+
+
     }
 
     private suspend fun fetchMenu(): List<MenuItemNetwork> {
 
         val response: MenuNetwork =
-            httpClient.get("https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/menu.json")
+            httpClient.get("https://marcfetterer.com/little-lemon/main/menu.json")
                 .body()
 
-   //     response.menu.forEach { println("The element is ${it.title}") }
+
         return response.menu ?: listOf()
 
     }
@@ -125,5 +130,6 @@ class MainActivity : ComponentActivity() {
     }
 
 }//END MainActivity
+
 
 
