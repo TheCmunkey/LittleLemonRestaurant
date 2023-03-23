@@ -78,7 +78,21 @@ fun HeroPanel()
     {
 
 
-
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(20.dp)
+                .zIndex(100000.0f)
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(
+                            Color(0x50000000),
+                            Color(0x10000000),
+                            Color(0x00100000),
+                            Color(0x00000000),
+                        )
+                    ))
+        )
         Row()
         {
 
@@ -159,9 +173,6 @@ fun HeroPanel()
                         )
                     ))
         )
-        {
-
-        }
 //        Button(
 //            onClick = { },
 //            colors = ButtonDefaults.buttonColors(buttoncolor),

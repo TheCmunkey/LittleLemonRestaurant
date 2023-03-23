@@ -14,6 +14,7 @@ fun isUserLoggedIn()  : Boolean {
 
 fun getFirstScreen() : String {
 
+    return (OnBoardingScreen.route)  //testing
 
     return when (isUserLoggedIn()) {
         true ->  (HomeScreen.route)

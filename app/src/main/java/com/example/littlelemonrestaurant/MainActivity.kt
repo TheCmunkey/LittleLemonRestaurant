@@ -30,50 +30,45 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
-
-
 class MainActivity : ComponentActivity() {
 
     private val menuItemListLiveData = MutableLiveData<MenuNetwork>()
 
     private val httpClient = HttpClient(Android) {
-        install(ContentNegotiation) {
-            json(contentType = ContentType("application", "json"))
 
+        install(ContentNegotiation) {
+            json(contentType = ContentType("application", "json")) //I switched this
         }
     }
     val database by lazy {
         Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database").build()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         savedLiveTrigger.postValue(false)
 
         mainActivity = this
 
-        //this.deleteDatabase("database");
+        //this.deleteDatabase("database"); //for TESTING purposes ONLY
+
         val startDestination = getFirstScreen()
 
         setContent {
-             LittleLemonRestaurantTheme {
+            LittleLemonRestaurantTheme {
 
-                 Box(modifier = Modifier.fillMaxSize())
-                 {
+                Box(modifier = Modifier.fillMaxSize())
+                {
 
-                     val navController = rememberNavController()
+                    val navController = rememberNavController()
 
-                     NavHost(navController = navController, startDestination = startDestination)
-                     {
+                    NavHost(navController = navController, startDestination = startDestination)
+                    {
 
-                         composable(HomeScreen.route){
-                             HomeScreen(navController)
-                         }
-                         composable(OnBoardingScreen.route) { OnBoardingScreen(navController) }
-                         composable(ProfileScreen.route)    { ProfileScreen(navController) }
+                        composable(HomeScreen.route) { HomeScreen(navController) }
+                        composable(OnBoardingScreen.route) { OnBoardingScreen(navController) }
+                        composable(ProfileScreen.route) { ProfileScreen(navController) }
 //                         composable(
 //                             DishDetails.route + "/{${DishDetails.argDishId}}",
 //                             arguments = listOf(navArgument(DishDetails.argDishId) {
@@ -85,10 +80,10 @@ class MainActivity : ComponentActivity() {
 //                                 requireNotNull(it.arguments?.getInt(DishDetails.argDishId)) { "Dish id is null" }
 //                             DishDetails(navController, id)
 //                         }
-                     }//END NavHost
+                    }//END NavHost
 
-                 }//END Box()
-             }//END LittleLemonRestaurantTheme
+                }//END Box()
+            }//END LittleLemonRestaurantTheme
         }//END setContent
 
         lifecycleScope.launch(Dispatchers.IO) {
@@ -99,25 +94,19 @@ class MainActivity : ComponentActivity() {
                     menuItemListLiveData.value = menu
 
 
-
                 }
             }
         }
     }//END onCreate
 
-
     companion object {
-        lateinit var mainActivity : MainActivity
-
-
+        lateinit var mainActivity: MainActivity
     }
 
     private suspend fun fetchMenu(): List<MenuItemNetwork> {
 
         val response: MenuNetwork =
-            httpClient.get("https://marcfetterer.com/little-lemon/main/menu.json")
-                .body()
-
+            httpClient.get("https://marcfetterer.com/little-lemon/main/menu.json").body()
 
         return response.menu ?: listOf()
 
