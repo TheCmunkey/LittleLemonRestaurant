@@ -9,28 +9,61 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+fun buttonModifier(height: Dp, width: Float): Modifier {
 
-val textBoxModifier = Modifier
-.height(58.dp)
-.fillMaxWidth(1.0f)
-.border(
-    BorderStroke(1.dp, color = Color(0x1F000000)),
-    RoundedCornerShape(100)
-)
-.shadow(
-    elevation = 20.dp,
-    shape = RoundedCornerShape(100.dp),
-    clip = false,
-    ambientColor = LittleLemonColor.Black,
-    spotColor = LittleLemonColor.Black
-)
-.shadow(
-    elevation = 4.dp,
-    shape = RoundedCornerShape(100.dp),
-    clip = false,
-    ambientColor = LittleLemonColor.Black,
-    spotColor = LittleLemonColor.Black
-)
-.padding(horizontal = 1.dp, vertical = 0.dp)
+    val textBoxModifier = Modifier
+        .height(height)
+        .fillMaxWidth(width)
+        .border(
+            BorderStroke(1.dp, color = Color(0x1F000000)),
+            RoundedCornerShape(100)
+        )
+        .shadow(
+            elevation = 20.dp,
+            shape = RoundedCornerShape(100.dp),
+            clip = false,
+            ambientColor = LittleLemonColor.Black,
+            spotColor = LittleLemonColor.Black
+        )
+        .shadow(
+            elevation = 4.dp,
+            shape = RoundedCornerShape(100.dp),
+            clip = false,
+            ambientColor = LittleLemonColor.Black,
+            spotColor = LittleLemonColor.Black
+        )
+        .padding(horizontal = 1.dp, vertical = 0.dp)
+
+    return (textBoxModifier)
+}
+
+fun DeleteProfileButtonModifier(height: Dp): Modifier {
+
+    val textBoxModifier = Modifier
+        .height(height)
+        .border(
+            BorderStroke(1.dp, color = Color(0x1F000000)),
+            RoundedCornerShape(100)
+        )
+
+
+        .shadow(
+            elevation = 20.dp,
+            shape = RoundedCornerShape(100.dp),
+            clip = false,
+            ambientColor = LittleLemonColor.Black,
+            spotColor = LittleLemonColor.Black
+        )
+        .shadow(
+            elevation = 4.dp,
+            shape = RoundedCornerShape(100.dp),
+            clip = false,
+            ambientColor = LittleLemonColor.Black,
+            spotColor = LittleLemonColor.Black
+        )
+
+    return (textBoxModifier)
+}

@@ -1,8 +1,6 @@
 package com.example.littlelemonrestaurant.fragments
 
-
-import android.view.View
-import androidx.appcompat.widget.AppCompatTextView
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
 import androidx.compose.material.Text
@@ -11,17 +9,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
-import com.example.littlelemonrestaurant.ui.theme.LittleLemonColor
-
-
-//############################################################
 
 fun Modifier.textGradientBrush(brush: Brush) = this
     .graphicsLayer(alpha = 0.99f)
@@ -32,22 +28,20 @@ fun Modifier.textGradientBrush(brush: Brush) = this
         }
     }
 
-//############################################################
-
 @Composable
-fun DropShadowText (
+fun DropShadowText(
     modifierTop: Modifier = Modifier,
     modifierBot: Modifier = Modifier,
-    textcolor: Color= Color.Black,
-    shadowcolor: Color= Color.Black,
+    textcolor: Color = Color.Black,
+    shadowcolor: Color = Color.Black,
     alpha: Float = 0.25f,
     offsetX: Dp = -(1.dp),
     offsetY: Dp = -(2.dp),
-    radius:  Dp = 2.dp,
-    text: String ="",
+    radius: Dp = 2.dp,
+    text: String = "",
     fontSize: TextUnit = 30.sp,
-    fontWeight: Int = 500 )
-{
+    fontWeight: Int = 500
+) {
     Box()
     {
 
@@ -71,42 +65,6 @@ fun DropShadowText (
     }
 }
 
-//############################################################
-
-@Composable
-fun EmojiView(emoji: String,fontSize: Float =0f)
-{
-    AndroidView(
-        factory = { context ->
-            AppCompatTextView(context).apply {
-                setTextColor(LittleLemonColor.Black.toArgb())
-                text = emoji ?: "😟"
-                textSize = fontSize
-                textAlignment = View.TEXT_ALIGNMENT_CENTER
-            }
-        },
-        update = {
-            it.apply {
-                text = emoji ?: "😟"
-            }
-        },
-    )
-}//END EmojiView
-
-
-
-//var str : String = "12345.678"
-//var float1 : Float = str.toFloat();
-//println("string to float - float1 $float1")
-
-//@Composable
-//fun lineHeightSpToDp()
-//{
-//    val lineHeightSp: TextUnit = 12.sp
-//    val lineHeightDp: Dp = with(LocalDensity.current) {
-//        lineHeightSp.toDp()
-//    }
-//}
 
 /**
  * px/dp/sp/pt/mm unit converter.
@@ -165,3 +123,11 @@ fun EmojiView(emoji: String,fontSize: Float =0f)
 //
 //inline val Int.mm get() = Pixel.fromMm(mm = this.toFloat())
 //inline val Float.mm get() = Pixel.fromMm(mm = this)
+
+@Composable
+fun ShadowBox(modifier: Modifier, brush: Brush) {
+    Box(
+        modifier = modifier
+            .background(brush)
+    )
+}//END ShadowBox

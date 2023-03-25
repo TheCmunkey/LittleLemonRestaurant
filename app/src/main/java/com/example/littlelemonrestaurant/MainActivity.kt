@@ -3,14 +3,13 @@ package com.example.littlelemonrestaurant
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveableStateHolder
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
@@ -19,7 +18,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import com.example.littlelemonrestaurant.fragments.*
 import com.example.littlelemonrestaurant.ui.theme.LittleLemonRestaurantTheme
-import com.google.gson.GsonBuilder
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
@@ -30,6 +28,10 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@ExperimentalAnimationApi
+@ExperimentalMaterialApi
+@ExperimentalComposeUiApi
+@ExperimentalFoundationApi
 class MainActivity : ComponentActivity() {
 
     private val menuItemListLiveData = MutableLiveData<MenuNetwork>()
@@ -108,7 +110,7 @@ class MainActivity : ComponentActivity() {
         val response: MenuNetwork =
             httpClient.get("https://marcfetterer.com/little-lemon/main/menu.json").body()
 
-        return response.menu ?: listOf()
+        return response.menu
 
     }
 

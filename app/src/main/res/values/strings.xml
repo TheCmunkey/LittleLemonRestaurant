@@ -12,5 +12,6 @@
     <string name="location">"Chicago"</string>
     <string name="description">We are a family-owned Mediterranean restaurant, focused on traditional recipes served with a modern twist</string>
     <string name="order_delivery">Order Delivery</string>
+    <string name="today_specials">Today\'s Specials</string>
 
 </resources>

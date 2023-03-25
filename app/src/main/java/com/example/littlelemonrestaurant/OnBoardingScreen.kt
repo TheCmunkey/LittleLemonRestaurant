@@ -1,21 +1,19 @@
 package com.example.littlelemonrestaurant
 
-import android.content.res.Configuration
 import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
@@ -23,8 +21,6 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
@@ -37,7 +33,6 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavHostController
@@ -46,10 +41,13 @@ import com.example.littlelemonrestaurant.fragments.Logo
 import com.example.littlelemonrestaurant.fragments.ProfileScreen
 import com.example.littlelemonrestaurant.ui.theme.LittleLemonColor
 import com.example.littlelemonrestaurant.ui.theme.LittleLemonRestaurantTheme
+import com.example.littlelemonrestaurant.ui.theme.buttonModifier
 import com.example.littlelemonrestaurant.ui.theme.get_textFieldColors
-import com.example.littlelemonrestaurant.ui.theme.textBoxModifier
 
-
+@ExperimentalAnimationApi
+@ExperimentalMaterialApi
+@ExperimentalComposeUiApi
+@ExperimentalFoundationApi
 @Composable
 fun OnBoardingScreen(navController: NavHostController) {
 
@@ -57,37 +55,33 @@ fun OnBoardingScreen(navController: NavHostController) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .background(LittleLemonColor.White)
-            .padding(start = 25.dp, end = 25.dp, top = 50.dp, bottom = 50.dp)
-
+            .padding(start = 25.dp, end = 25.dp, top = 30.dp, bottom = 30.dp)
     )
     {
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-//                .shadow(56.dp,shape = RoundedCornerShape(16.dp),clip = false,
-//                    ambientColor = Color(0xFFFFFF00), spotColor = Color(0xFFFFFF00))
-//                .shadow(30.dp,shape = RoundedCornerShape(16.dp),clip = false,
-//                    ambientColor = Color(0xaFFFFF00), spotColor = Color(0xaFFFFF00))
                 .shadow(
                     26.dp, shape = RoundedCornerShape(16.dp), clip = false,
-                    ambientColor = Color(0xFF40FF00), spotColor = Color(0xFF40FF00)
+                    ambientColor = Color(0xFFFFFF00), spotColor = Color(0xFFFFFF00)
                 )
                 .shadow(
                     16.dp, shape = RoundedCornerShape(16.dp), clip = false,
-                    ambientColor = Color(0xFF40FF00), spotColor = Color(0xFF40FF00)
+                    ambientColor = Color(0xFFFFFF00), spotColor = Color(0xFFFFFF00)
                 )
                 .shadow(
                     8.dp, shape = RoundedCornerShape(16.dp), clip = false,
-                    ambientColor = Color(0xFF4FFF00), spotColor = Color(0xFF4FFF00)
+                    ambientColor = Color(0xFF000000), spotColor = Color(0xFF000000)
                 )
                 .shadow(
                     4.dp, shape = RoundedCornerShape(16.dp), clip = false,
                     ambientColor = Color(0xFF000000), spotColor = Color(0xFF000000)
                 )
-                .fillMaxSize()
+                .fillMaxWidth()
+                .wrapContentHeight(align = Alignment.CenterVertically)
                 .border(
                     BorderStroke(1.dp, color = Color(0x80000000)),
                     RoundedCornerShape(16.dp)
@@ -96,11 +90,13 @@ fun OnBoardingScreen(navController: NavHostController) {
                 .background(Color.White)
                 .verticalScroll(rememberScrollState())
                 .padding(vertical = 14.dp)
-
         )
         {
 
-            Logo()
+            Column(Modifier.height(78.dp))
+            {
+                Logo()
+            }
             GetStartedSplashScreen()
             Form(navController)
         }
@@ -109,7 +105,7 @@ fun OnBoardingScreen(navController: NavHostController) {
 }//END OnBoardingScreen()
 
 var testWidth = 1.0f
-fun fuck(x: Float) {
+fun shitTest(x: Float) {
     testWidth = x
 }
 
@@ -119,20 +115,11 @@ fun GetStartedSplashScreen() {
     val lemonTree = ImageBitmap.imageResource(id = R.drawable.lemontree2)
     val srcSize = IntSize(lemonTree.width, lemonTree.height)
     val srcOffset = IntOffset(0, 0)
-    val contentScale =
-        if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            ContentScale.FillWidth
-        } else {
-            ContentScale.FillHeight
-        }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        //verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxWidth()
-            //.height(IntrinsicSize.Max)
-            // .requiredHeightIn(200.dp, 250.dp)
             .wrapContentHeight()
             .clipToBounds()
             .drawBehind {
@@ -147,12 +134,6 @@ fun GetStartedSplashScreen() {
 
             }
 
-//                .paint(
-//                    painterResource(id = R.drawable.lemontree2),
-//                    contentScale = ContentScale.FillWidth,
-//                    alignment = Alignment.Center,
-//                    colorFilter = ColorFilter.tint(Color(0x02FFFFFF), BlendMode.Exclusion)
-//                )
 //.background(Color.DarkGray)
     )
     {
@@ -175,7 +156,7 @@ fun GetStartedSplashScreen() {
 
         //Text("Width= $testWidth", color = Color(0xFFFFFFFF))
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         val text = (stringResource(id = R.string.welcome)).split("\n")
         text.forEach {
@@ -197,10 +178,10 @@ fun GetStartedSplashScreen() {
                     .fillMaxWidth()
                     .wrapContentHeight()
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(5.dp))
         }//Print all strings forEach
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(5.dp))
 
         Box(
             modifier = Modifier
@@ -221,6 +202,10 @@ fun GetStartedSplashScreen() {
 
 }//END GetStartedSplashScreen
 
+@ExperimentalAnimationApi
+@ExperimentalMaterialApi
+@ExperimentalComposeUiApi
+@ExperimentalFoundationApi
 @Composable
 fun Form(navController: NavHostController) {
     val firstNameSaved = MutableLiveData<String>()
@@ -281,18 +266,14 @@ fun Form(navController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxHeight(1.0f)
-//                    .shadow(12.dp)
-//                    .clip(RoundedCornerShape(10.dp))
-//                    .background(Color.White)
-//                    //        .verticalScroll(rememberScrollState())
-            .padding(vertical = 14.dp)
+            .padding(vertical = 10.dp)
     )
     {
 
         val focusManager = LocalFocusManager.current
 
 //FIRST NAME
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         val first = firstNameSaved.observeAsState("")
         Row(
@@ -306,7 +287,7 @@ fun Form(navController: NavHostController) {
                 color = firstNameColor,
                 fontSize = 24.sp
             )
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(12.dp))
             OutlinedTextField(
                 isError = firstNameError,
                 value = first.value,
@@ -318,31 +299,21 @@ fun Form(navController: NavHostController) {
                         firstNameSaved.value = it
                     }
                 },
-                modifier = textBoxModifier,
+                modifier = buttonModifier(58.dp, 1.0f),
                 textStyle = TextStyle(fontSize = 20.sp),
                 colors = get_textFieldColors(),
                 shape = RoundedCornerShape(100),
                 singleLine = true,
-//                    keyboardOptions = KeyboardOptions(
-//                        imeAction = ImeAction.Next
-//                    ),
                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words),
                 keyboardActions = KeyboardActions {
                     // focusManager.moveFocus(FocusDirection.Down)
                     focusManager.clearFocus()
                 },
-//                    label = {
-//                        Text(
-//                            text = stringResource(id = R.string.enter_first_name),
-//                            fontSize = 24.sp
-//                        )
-//
-//                    }
             )
         }//END Row firstName
 
 //LAST NAME:
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         val last = lastNameSaved.observeAsState("")
         Row(
@@ -368,7 +339,7 @@ fun Form(navController: NavHostController) {
                         lastNameSaved.value = it
                     }
                 },
-                modifier = textBoxModifier,
+                modifier = buttonModifier(58.dp, 1.0f),
                 textStyle = TextStyle(fontSize = 20.sp),
                 colors = get_textFieldColors(),
                 shape = RoundedCornerShape(100),
@@ -384,7 +355,7 @@ fun Form(navController: NavHostController) {
 
 ////EMAIL
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         val email = emailSaved.observeAsState("")
         Row(
@@ -410,7 +381,7 @@ fun Form(navController: NavHostController) {
                         emailSaved.value = it
                     }
                 },
-                modifier = textBoxModifier,
+                modifier = buttonModifier(58.dp, 1.0f),
                 textStyle = TextStyle(fontSize = 20.sp),
                 colors = get_textFieldColors(),
                 shape = RoundedCornerShape(100),
@@ -423,7 +394,7 @@ fun Form(navController: NavHostController) {
         }//END Row email
 
 //REGISTER
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
     }//END Column
 
@@ -458,9 +429,7 @@ fun Form(navController: NavHostController) {
 //                hoveredElevation = 4.dp,
 //                focusedElevation = 4.dp
 //            ),
-            modifier = textBoxModifier
-                // .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
-                .fillMaxWidth()
+            modifier = buttonModifier(58.dp, 1.0f),
         )
         {
             Text(
@@ -480,6 +449,10 @@ fun Form(navController: NavHostController) {
 
 }//END Column
 
+@ExperimentalAnimationApi
+@ExperimentalMaterialApi
+@ExperimentalComposeUiApi
+@ExperimentalFoundationApi
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {

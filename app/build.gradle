@@ -53,10 +53,14 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
 }
  
 
 dependencies {
+
+    ///LAZY COLUMNS WITH SCROLL BARS
+    implementation 'com.github.BILLyTheLiTTle:LazyColumns:0.2.7'
 
     def paging_compose_version = "1.0.0-alpha01"
     implementation "androidx.paging:paging-compose:$paging_compose_version"

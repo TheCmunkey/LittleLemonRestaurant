@@ -1,80 +1,60 @@
 package com.example.littlelemonrestaurant
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.*
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.littlelemonrestaurant.fragments.*
+import com.example.littlelemonrestaurant.fragments.DrawMenuItemsList
+import com.example.littlelemonrestaurant.fragments.HeroPanel
+import com.example.littlelemonrestaurant.fragments.TopNavBar
 
+var savedListState = LazyListState(0, 0)
 
-var savedListState = LazyListState(0,0)
-
-
-
+@ExperimentalAnimationApi
+@ExperimentalMaterialApi
+@ExperimentalComposeUiApi
+@ExperimentalFoundationApi
 @Composable
-fun HomeScreen(navController: NavHostController)
-{
+fun HomeScreen(navController: NavHostController) {
 
     val configuration = LocalConfiguration.current
-    val interactionSource = remember { MutableInteractionSource() }
 
-    val contentScale = if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        ContentScale.FillWidth
-    }
-    else {
-        ContentScale.FillHeight
-    }
-
-
-
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            //.shadow(12.dp)
-           // .clip(RoundedCornerShape(10.dp))
-            //.background(Color.White)
-            //.verticalScroll(rememberScrollState())
-            .padding(horizontal = 0.dp, vertical = 0.dp)
-    )
+    Column()
     {
+        if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            TopNavBar(navController, "ProfileScreen")
+            HeroPanel()
+            DrawMenuItemsList()
 
+        } else {
+            TopNavBar(navController, "ProfileScreen")
+            Row(Modifier.fillMaxHeight(1.0f))
+            {
+                Column(modifier = Modifier.fillMaxWidth(0.5f))
+                {
+                    HeroPanel()
 
-        Row(
-            horizontalArrangement = Arrangement.End,
-            modifier = Modifier.fillMaxWidth()
-                .background(Color.White)
-        )
-        {
-            Logo()
-            Spacer(Modifier.weight(1f))
-            AdvancedIcon(
-                icon_id = R.drawable.baseline_person_24,
-                text = "Profile",
-                navController = navController
-            )
-        }//END Row()
+                }//END COL
+                Column(modifier = Modifier.fillMaxWidth(1.0f))
+                {
+                    DrawMenuItemsList()
+                }//END COL
+            }//END Row
+        }//END LandScape mode
 
-        HeroPanel()
-        CategoriesPanel()
-        DrawMenuItemsList()
+    }//END Column
 
-    }//END COL
-
-
- }//END HomeScreen
+}//END HomeScreen
 
 
 

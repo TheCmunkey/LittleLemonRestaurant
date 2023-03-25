@@ -1,8 +1,7 @@
 package com.example.littlelemonrestaurant.ui.theme
 
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.geometry.center
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 
 val brush_1 = Brush.horizontalGradient(
     listOf( Color(0xFFFFC107),
@@ -10,30 +9,45 @@ val brush_1 = Brush.horizontalGradient(
         LittleLemonColor.White,
         LittleLemonColor.Yellow))
 
-val brush_2 = Brush.horizontalGradient(
-    listOf( LittleLemonColor.Black,
-        LittleLemonColor.Black,
-        LittleLemonColor.Grey,
-        LittleLemonColor.Black))
 
+val leftShadowBrush = Brush.horizontalGradient(
 
+        0.0f to Color(0xaF000000),
+        0.2f to Color(0x6F004040),
+        0.7f to Color(0x1F004040),
+        1.0f to Color(0x00004040),
+)
+val rightShadowBrush = Brush.horizontalGradient(
 
-val largeRadialGradient = object : ShaderBrush()
-{
-    override fun createShader(size: Size): Shader
-    {
-        val biggerDimension = maxOf(size.height, size.width)
+    0.0f to Color( 0x00004040),
+    0.3f to Color( 0x1F004040),
+    0.8f to Color( 0x6F004040),
+    1.0f to Color( 0xaF000000),
+)
+val bottomShadowBrush = Brush.verticalGradient(
 
-        return RadialGradientShader(
+    0.0f to Color( 0x00000000),
+    0.3f to Color( 0x1F000000),
+    0.9f to Color( 0x3F000000),
+    1.0f to Color( 0xaF000000),
+)
 
-            colors = listOf(
-                Color(0xFF2be4dc),
-                Color(0xFF243484)
-            ),
-
-            center = size.center,
-            radius = biggerDimension / 2f,
-            colorStops = listOf(0f, 0.95f)
-        )
-    }
-}//END largeRadialGradient
+//val largeRadialGradient = object : ShaderBrush()
+//{
+//    override fun createShader(size: Size): Shader
+//    {
+//        val biggerDimension = maxOf(size.height, size.width)
+//
+//        return RadialGradientShader(
+//
+//            colors = listOf(
+//                Color(0xFF2be4dc),
+//                Color(0xFF243484)
+//            ),
+//
+//            center = size.center,
+//            radius = biggerDimension / 2f,
+//            colorStops = listOf(0f, 0.95f)
+//        )
+//    }
+//}//END largeRadialGradient
