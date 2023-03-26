@@ -1,5 +1,6 @@
 package com.example.littlelemonrestaurant.fragments
 
+import android.app.Activity
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -25,15 +26,12 @@ import com.example.littlelemonrestaurant.MainActivity
 import com.example.littlelemonrestaurant.R
 import com.example.littlelemonrestaurant.ui.theme.LittleLemonColor
 
-@ExperimentalAnimationApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@ExperimentalFoundationApi
+
 @Composable
 fun DeleteProfileDialogBox(navController: NavHostController, onDismiss: () -> Unit) {
 
     val contextForToast = LocalContext.current.applicationContext
-    val mainActivity = MainActivity.mainActivity
+    val mainActivity = LocalContext.current as Activity
     val sharedPreferences by lazy {
         mainActivity.getSharedPreferences("LittleLemon", ComponentActivity.MODE_PRIVATE)
     }

@@ -1,22 +1,25 @@
 package com.example.littlelemonrestaurant
 
+import android.app.Activity
 import androidx.activity.ComponentActivity
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Divider
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -35,10 +38,7 @@ data class Post(val openDialog: MutableState<Boolean> = mutableStateOf(false))
 
 val LocalPost = compositionLocalOf { Post(openDialog = mutableStateOf(false)) }
 
-@ExperimentalAnimationApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@ExperimentalFoundationApi
+
 @Composable
 fun ProfileScreen(navController: NavHostController) {
 
@@ -91,10 +91,6 @@ fun ProfileScreen(navController: NavHostController) {
 
 }//END HomeScreen
 
-@ExperimentalAnimationApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@ExperimentalFoundationApi
 @Composable
 fun PrintUserProfileInfo() {
 
@@ -106,7 +102,7 @@ fun PrintUserProfileInfo() {
     var buttonColor: Color = LittleLemonColor.Yellow
     if (isPressed) buttonColor = LittleLemonColor.DarkGray
 
-    val mainActivity = MainActivity.mainActivity
+    val mainActivity = LocalContext.current as Activity
     val sharedPreferences by lazy {
         mainActivity.getSharedPreferences("LittleLemon", ComponentActivity.MODE_PRIVATE)
     }

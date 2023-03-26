@@ -1,19 +1,21 @@
 package com.example.littlelemonrestaurant
 
+import android.app.Activity
 import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
@@ -21,6 +23,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
@@ -44,10 +47,6 @@ import com.example.littlelemonrestaurant.ui.theme.LittleLemonRestaurantTheme
 import com.example.littlelemonrestaurant.ui.theme.buttonModifier
 import com.example.littlelemonrestaurant.ui.theme.get_textFieldColors
 
-@ExperimentalAnimationApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@ExperimentalFoundationApi
 @Composable
 fun OnBoardingScreen(navController: NavHostController) {
 
@@ -202,10 +201,7 @@ fun GetStartedSplashScreen() {
 
 }//END GetStartedSplashScreen
 
-@ExperimentalAnimationApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@ExperimentalFoundationApi
+
 @Composable
 fun Form(navController: NavHostController) {
     val firstNameSaved = MutableLiveData<String>()
@@ -219,10 +215,10 @@ fun Form(navController: NavHostController) {
     var firstNameColor = LittleLemonColor.Black
     var lastNameColor = LittleLemonColor.Black
     var emailColor = LittleLemonColor.Black
-
-    val mainActivity = MainActivity.mainActivity
+    val context = LocalContext.current
+    val mainActivity = LocalContext.current as Activity
     val sharedPreferences by lazy {
-        mainActivity.getSharedPreferences("LittleLemon", ComponentActivity.MODE_PRIVATE)
+        context.getSharedPreferences("LittleLemon", ComponentActivity.MODE_PRIVATE)
     }
 
     firstNameSaved.value = sharedPreferences.getString("firstName", "")
@@ -449,10 +445,6 @@ fun Form(navController: NavHostController) {
 
 }//END Column
 
-@ExperimentalAnimationApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@ExperimentalFoundationApi
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {

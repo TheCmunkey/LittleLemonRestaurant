@@ -8,6 +8,8 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.MutableLiveData
@@ -42,7 +44,7 @@ class MainActivity : ComponentActivity() {
             json(contentType = ContentType("application", "json")) //I switched this
         }
     }
-    val database by lazy {
+    private val database by lazy {
         Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database").build()
     }
 
@@ -51,24 +53,25 @@ class MainActivity : ComponentActivity() {
 
         savedLiveTrigger.postValue(false)
 
-        mainActivity = this
-
         //this.deleteDatabase("database"); //for TESTING purposes ONLY
 
-        val startDestination = getFirstScreen()
 
         setContent {
+
+            val startDestination = getFirstScreen()
+
             LittleLemonRestaurantTheme {
+
 
                 Box(modifier = Modifier.fillMaxSize())
                 {
-
+                    val databaseMenuItems by  database.menuItemDao().getAll().observeAsState(emptyList())
                     val navController = rememberNavController()
 
                     NavHost(navController = navController, startDestination = startDestination)
                     {
 
-                        composable(HomeScreen.route) { HomeScreen(navController) }
+                        composable(HomeScreen.route) { HomeScreen(navController,databaseMenuItems) }
                         composable(OnBoardingScreen.route) { OnBoardingScreen(navController) }
                         composable(ProfileScreen.route) { ProfileScreen(navController) }
 //                         composable(
@@ -102,7 +105,7 @@ class MainActivity : ComponentActivity() {
     }//END onCreate
 
     companion object {
-        lateinit var mainActivity: MainActivity
+        lateinit var testmainActivity: MainActivity
     }
 
     private suspend fun fetchMenu(): List<MenuItemNetwork> {
@@ -118,6 +121,7 @@ class MainActivity : ComponentActivity() {
 
         val menuItemsRoom = menuItemsNetwork.map { it.toMenuItemRoom() }
         database.menuItemDao().insertAll(*menuItemsRoom.toTypedArray())
+        database.close()
     }
 
 }//END MainActivity

@@ -1,28 +1,28 @@
 package com.example.littlelemonrestaurant.fragments
 
+import android.app.Activity
 import android.content.res.Resources
 import androidx.activity.ComponentActivity
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.platform.LocalContext
 import com.example.littlelemonrestaurant.MainActivity
-@ExperimentalAnimationApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@ExperimentalFoundationApi
+
+@Composable
 fun isUserLoggedIn()  : Boolean {
 
+    val mainActivity = LocalContext.current as Activity
     val sharedPreferences by lazy {
-        MainActivity.mainActivity.getSharedPreferences("LittleLemon", ComponentActivity.MODE_PRIVATE)
+                 mainActivity.getSharedPreferences("LittleLemon", ComponentActivity.MODE_PRIVATE)
     }
 
     return sharedPreferences.getBoolean("loggedIn", false)
 }
-@ExperimentalAnimationApi
-@ExperimentalMaterialApi
-@ExperimentalComposeUiApi
-@ExperimentalFoundationApi
+
+@Composable
 fun getFirstScreen() : String {
 
     ///return(HomeScreen.route)  for testing
